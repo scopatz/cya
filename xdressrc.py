@@ -8,8 +8,7 @@ package = "cya"
 # Don't do too much
 make_extra_types = True
 make_stlcontainers = False
-defines = ["H5_NO_DEPRECATED_SYMBOLS", 
-           "DIR=__dirstream", ]
+defines = ["H5_NO_DEPRECATED_SYMBOLS", "DIR=__dirstream", ]
 clear_parser_memo_period = 25
 
 # Fake out package headers
@@ -36,8 +35,6 @@ for _pf in _pkgfiles:
     _code = '#include "H5public.h"\n'
     if _base in set(['H5R', 'H5FS', 'H5B2', 'H5MF', 'H5F', 'H5HF', 'H5HG']):
         _code += '#include <stdio.h>\n'
-    #if _base == 'H5SM':
-    #    _code += '#include <stdlib.h>\n#include "H5FLprivate.h"\n'
     if _base == 'H5Z':
         _code += '#include "H5Iprivate.h"\n'
     _code += '#include "{base}public.h"\n'.format(base=_base)
@@ -51,8 +48,6 @@ for _pf in _pkgfiles:
     _code = '#include "H5public.h"\n'
     if _base in set(['H5R', 'H5FS', 'H5B2', 'H5MF', 'H5F', 'H5HF', 'H5HG']):
         _code += '#include <stdio.h>\n'
-    #if _base == 'H5SM':
-    #    _code += '#include <stdlib.h>\n#include "H5FLprivate.h"\n'
     if _base == 'H5Z':
         _code += '#include "H5Iprivate.h"\n'
     _code += '#include "{base}private.h"\n'.format(base=_base)
@@ -64,7 +59,7 @@ for _pf in _pkgfiles:
 # Find source files and search for their contents
 _fs = set(os.listdir(sourcedir))
 _fs -= set(['H5FDsec2.c', 'H5PL.c', 'H5FDstdio.c', 'H5FDcore.c', 'H5Dbtree.c', 
-            'H5trace.c', 'H5FDlog.c', 'H5system.c',])
+            'H5trace.c', 'H5FDlog.c', 'H5system.c', 'H5L.c'])
 _fs = sorted(_fs)
 _fs = [('*', f.rsplit('.', 1)[0], 'hdf5') for f in _fs \
        if f.endswith('.c')]
