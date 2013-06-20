@@ -58,11 +58,14 @@ for _pf in _pkgfiles:
 
 # Find source files and search for their contents
 _fs = set(os.listdir(sourcedir))
-_fs -= set(['H5FDsec2.c', 'H5PL.c', 'H5FDstdio.c', 'H5FDcore.c', 'H5Dbtree.c', 
-            'H5trace.c', 'H5FDlog.c', 'H5system.c', 'H5L.c', 'H5Gname.c'])
+#_fs = set(os.listdir(sourcedir))
+#_fs -= set([f for f in _fs if 'test' in f])
+#_fs -= set(['H5FDsec2.c', 'H5PL.c', 'H5FDstdio.c', 'H5FDcore.c', 'H5Dbtree.c', 
+#            'H5trace.c', 'H5FDlog.c', 'H5system.c', 'H5L.c', 'H5Gname.c'])
+_fs = set([f for f in os.listdir(sourcedir) if 'public' in f or 'private' in f or\
+                                               'pkg' in f])
 _fs = sorted(_fs)
-_fs = [('*', f.rsplit('.', 1)[0], 'hdf5') for f in _fs \
-       if f.endswith('.c')]
+_fs = [('*', f.rsplit('.', 1)[0], 'hdf5') for f in _fs if f.endswith('.c')]
 
 classes = list(_fs)
 functions = list(_fs)
